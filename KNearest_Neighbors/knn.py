@@ -83,24 +83,32 @@ if __name__ == '__main__':
     test_scores = []
     ks = (1,2,3,4,5,6,7)
     for k in ks:
+    #cross validating with different values of k to find the best choice. 
+    #k = 5 gave the best result in term of train accuracy and test accuracy
         print ("\nk:", k)
         knn = KNN(k)
         t0 = datetime.now()
         knn.fit(Xtrain, Ytrain)
         print("Training time:", (datetime.now() - t0))
+        #timing how long it took to train the model
 
         t0 = datetime.now()
         train_score = knn.score(Xtrain, Ytrain)
         train_scores.append(train_score)
         print("Time to get train accuracy:", (datetime.now() - t0), "Length of train data:", len(Ytrain))
+        #timing how long it took to get the train accuracy
 
         t0 = datetime.now()
         test_score = knn.score(Xtest, Ytest)
         test_scores.append(test_score)
         print("Time to get test accuracy:", (datetime.now() - t0), "Length of test data:", len(Ytest))
+        #timing how long it took to get the test accuracy
+
 
     print("Train scores:", train_scores)
     print("Test scores:", test_scores)
+    #printing the train accuracy and test accuracy values
+    #and plotting these accuracies below
     
     plt.plot(ks, train_scores, label="train_scores")
     plt.plot(ks, test_scores, label="test_scores")
